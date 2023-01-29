@@ -1,0 +1,43 @@
+<form class="form" [formGroup]="form">
+  <div class="form__container">
+    <div class="form__container column">
+      <mat-form-field
+        [hideRequiredMarker]="true"
+        class="form__field form__field_login"
+      >
+        <mat-label>E-mail</mat-label>
+        <input
+          class="form__input"
+          type="email"
+          matInput
+          formControlName="email"
+        />
+      </mat-form-field>
+      <mat-form-field
+        [hideRequiredMarker]="true"
+        class="form__field form__field_login"
+      >
+        <mat-label>Пароль</mat-label>
+        <input
+          class="form__input"
+          type="password"
+          matInput
+          formControlName="password"
+        />
+      </mat-form-field>
+    </div>
+    <button
+      type="submit"
+      class="btn btn_filled"
+      (click)="onSubmit()"
+    >
+        <span class="row center">
+          <!-- <mat-spinner
+            diameter="15"
+            *ngIf="isLoadingForm$ | async"
+          ></mat-spinner> -->
+          Войти
+        </span>
+    </button>
+  </div>
+</form>
