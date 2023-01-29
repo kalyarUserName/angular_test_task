@@ -1,43 +1,73 @@
-<form class="form" [formGroup]="form">
-  <div class="form__container">
-    <div class="form__container column">
-      <mat-form-field
-        [hideRequiredMarker]="true"
-        class="form__field form__field_login"
+<div class="register">
+  <h2 class="register-header">Регистрация</h2>
+  <form class="form" [formGroup]="form">
+    <div class="register-container">
+      <div class="form__container column">
+        <mat-form-field
+          [hideRequiredMarker]="true"
+          class="form__field"
+        >
+          <mat-label>E-mail</mat-label>
+          <input
+            class="form__input"
+            type="email"
+            matInput
+            formControlName="email"
+          />
+          <mat-error *ngIf="form.controls['email'].invalid && form.controls['email'].touched" class="error">
+            Некорректный email
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          [hideRequiredMarker]="true"
+          class="form__field"
+        >
+          <mat-label>Пароль</mat-label>
+          <input
+            class="form__input"
+            type="password"
+            matInput
+            formControlName="password"
+            [type]="isPasswordHide ? 'password' : 'text'"
+          />
+          <mat-icon matSuffix
+                    (click)="isPasswordHide = !isPasswordHide">{{isPasswordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error *ngIf="form.controls['password'].invalid && form.controls['password'].touched" class="error">
+            Некорректный пароль
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          [hideRequiredMarker]="true"
+          class="form__field"
+        >
+          <mat-label>Пароль</mat-label>
+          <input
+            class="form__input"
+            type="password"
+            matInput
+            formControlName="confirmPassword"
+            [type]="isConfirmPasswordHide ? 'password' : 'text'"
+          />
+          <mat-icon matSuffix
+                    (click)="isConfirmPasswordHide = !isConfirmPasswordHide">{{isConfirmPasswordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error *ngIf="form.controls['confirmPassword'].invalid && form.controls['confirmPassword'].touched"
+                     class="error">
+            Пароли не совпадают
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div
+        class="btn"
       >
-        <mat-label>E-mail</mat-label>
-        <input
-          class="form__input"
-          type="email"
-          matInput
-          formControlName="email"
-        />
-      </mat-form-field>
-      <mat-form-field
-        [hideRequiredMarker]="true"
-        class="form__field form__field_login"
-      >
-        <mat-label>Пароль</mat-label>
-        <input
-          class="form__input"
-          type="password"
-          matInput
-          formControlName="password"
-        />
-      </mat-form-field>
+
+        <button
+          type="submit" mat-raised-button
+          (click)="onSubmit()"
+          [disabled]="form.invalid"
+        >
+          Регистрация
+        </button>
+      </div>
     </div>
-    <button
-      type="submit"
-      class="btn btn_filled"
-      (click)="onSubmit()"
-    >
-        <span class="row center">
-          <!-- <mat-spinner
-            diameter="15"
-            *ngIf="isLoadingForm$ | async"
-          ></mat-spinner> -->
-          Войти
-        </span>
-    </button>
-  </div>
-</form>
+  </form>
+</div>

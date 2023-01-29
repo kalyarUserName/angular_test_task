@@ -9,6 +9,8 @@ import {Router} from "@angular/router";
 })
 export class RegisterComponent implements OnInit {
   public form!: FormGroup;
+  isPasswordHide = true;
+  isConfirmPasswordHide = true;
 
   constructor(private fb: FormBuilder, private router: Router) {
   }
@@ -30,16 +32,19 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(20),
-        Validators.pattern("[A-Za-z0-9]")]],
+        Validators.pattern("[A-Za-z0-9]+")]],
       confirmPassword: ['', [
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(20),
-        Validators.pattern("[A-Za-z0-9]"),
+        Validators.pattern("[A-Za-z0-9]+"),
         this.checkPasswords]]
     });
   }
+
   public onSubmit(): void {
-    this.router.navigate(["profile"]);
+    this.router.navigate(["/second"],
+      {state: {user: {email: this.form.get("email")?.value, password: this.form.get("password")?.value}}}
+    );
   }
 }
